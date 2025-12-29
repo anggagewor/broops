@@ -1,0 +1,12 @@
+<?php
+
+namespace Modules\Platform\Auth\Domain\Contracts;
+
+use Modules\Platform\Auth\Domain\Entities\User;
+
+interface UserRepository
+{
+    public function findByEmail(string $email): ?User;
+    public function create(string $email, string $passwordHash): User;
+
+}

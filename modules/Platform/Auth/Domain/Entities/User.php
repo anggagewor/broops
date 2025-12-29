@@ -8,6 +8,7 @@ readonly class User
         public int    $id,
         public string $email,
         public string $passwordHash,
+        public string $name,
         public bool   $isActive,
     ) {}
 }

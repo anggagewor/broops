@@ -15,7 +15,8 @@ class RegisterController extends Controller
     ) {
         $result = $registerUser->execute(
             email: $request->email,
-            password: $request->password
+            password: $request->password,
+            name: $request->name
         );
 
         if (isset($result['error'])) {

@@ -20,15 +20,17 @@ class EloquentUserRepository implements UserRepository
             id: $model->id,
             email: $model->email,
             passwordHash: $model->password,
+            name: $model->name,
             isActive: (bool) $model->is_active
         );
     }
 
-    public function create(string $email, string $passwordHash): User
+    public function create(string $email, string $passwordHash, string $name): User
     {
         $model = UserModel::create([
             'email' => $email,
             'password' => $passwordHash,
+            'name' => $name,
             'is_active' => true,
         ]);
 
@@ -36,6 +38,7 @@ class EloquentUserRepository implements UserRepository
             id: $model->id,
             email: $model->email,
             passwordHash: $model->password,
+            name: $model->name,
             isActive: (bool) $model->is_active
         );
     }

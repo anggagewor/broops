@@ -9,10 +9,10 @@
 **Goal:** BroOps bisa login, multi-company, dan siap ditumpangi modul
 
 ### 🔐 Auth & Access
-- [ ] Setup Laravel project (modular)
-- [ ] Auth (JWT / Session)
+- [x] Setup Laravel project (modular)
+- [x] Auth (JWT / Session)
 - [ ] Login / Logout
-- [ ] Refresh token
+- [x] Refresh token
 - [ ] Password reset
 - [ ] Email verification
 

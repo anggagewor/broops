@@ -12,17 +12,7 @@ class EloquentUserRepository implements UserRepository
     {
         $model = UserModel::where('email', $email)->first();
 
-        if (! $model) {
-            return null;
-        }
-
-        return new User(
-            id: $model->id,
-            email: $model->email,
-            passwordHash: $model->password,
-            name: $model->name,
-            isActive: (bool) $model->is_active
-        );
+        return $model ? $this->mapToDomain($model) : null;
     }
 
     public function create(string $email, string $passwordHash, string $name): User
@@ -34,6 +24,18 @@ class EloquentUserRepository implements UserRepository
             'is_active' => true,
         ]);
 
+        return $this->mapToDomain($model);
+    }
+
+    public function findById(int $id): ?User
+    {
+        $model = UserModel::find($id);
+
+        return $model ? $this->mapToDomain($model) : null;
+    }
+
+    private function mapToDomain(UserModel $model): User
+    {
         return new User(
             id: $model->id,
             email: $model->email,
@@ -42,5 +44,6 @@ class EloquentUserRepository implements UserRepository
             isActive: (bool) $model->is_active
         );
     }
+
 
 }

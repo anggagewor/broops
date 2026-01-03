@@ -16,7 +16,7 @@ readonly class LoginUser
         private TokenRepository $tokens
     ) {}
 
-    public function execute(string $email, string $password): array
+    public function execute(string $email, string $password, string $device_id): array
     {
         $user = $this->users->findByEmail($email);
 
@@ -29,7 +29,7 @@ readonly class LoginUser
         }
 
         $accessToken  = $this->issuer->issueAccessToken($user);
-        $refreshToken = $this->issuer->issueRefreshToken($user);
+        $refreshToken = $this->issuer->issueRefreshToken($user, $device_id);
 
         $this->tokens->saveRefreshToken($refreshToken);
 

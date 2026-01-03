@@ -13,7 +13,8 @@ class LoginController extends Controller
     {
         $result = $loginUser->execute(
             email: $request->email,
-            password: $request->password
+            password: $request->password,
+            device_id: $request->device_id
         );
 
         if (isset($result['error'])) {

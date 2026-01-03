@@ -11,7 +11,7 @@ return new class extends Migration {
             $table->id();
 
             $table->unsignedBigInteger('user_id');
-            $table->string('token', 255)->unique();
+            $table->char('token', 64)->unique();
 
             $table->string('device')->nullable();
 
@@ -19,10 +19,12 @@ return new class extends Migration {
             $table->timestamp('revoked_at')->nullable();
 
             $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable();
 
-            $table->index(['user_id']);
-            $table->index(['token']);
+            $table->index('user_id');
+            $table->index(['expires_at', 'revoked_at']);
         });
+
     }
 
     public function down(): void

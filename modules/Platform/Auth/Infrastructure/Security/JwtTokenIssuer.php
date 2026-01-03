@@ -25,7 +25,7 @@ class JwtTokenIssuer implements TokenIssuer
 
         $accessToken = JWT::encode(
             $payload,
-            config('app.key'),
+            config('jwt.jwt_secret'),
             'HS256'
         );
 
@@ -44,17 +44,18 @@ class JwtTokenIssuer implements TokenIssuer
                 'iat' => time(),
                 'exp' => time() + (15 * 60),
             ],
-            config('auth.jwt_secret'),
+            config('jwt.jwt_secret'),
             'HS256'
         );
     }
 
-    public function issueRefreshToken(User $user): RefreshToken
+    public function issueRefreshToken(User $user, string $device_id): RefreshToken
     {
         return new RefreshToken(
             token: Str::random(64),
             userId: $user->id,
-            expiresAt: now()->addDays(30)
+            expiresAt: now()->addDays(30),
+            device_id: $device_id,
         );
     }
 }

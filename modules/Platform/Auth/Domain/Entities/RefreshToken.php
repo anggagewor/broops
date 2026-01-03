@@ -9,7 +9,8 @@ final readonly class RefreshToken
     public function __construct(
         public string $token,
         public int    $userId,
-        public Carbon $expiresAt
+        public Carbon $expiresAt,
+        public string $device_id,
     ) {}
 
     public function isExpired(): bool

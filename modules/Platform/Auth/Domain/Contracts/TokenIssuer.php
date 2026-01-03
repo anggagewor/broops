@@ -8,6 +8,6 @@ use Modules\Platform\Auth\Domain\Entities\User;
 interface TokenIssuer
 {
     public function issue(User $user): array;
-    public function issueRefreshToken(User $user): RefreshToken;
+    public function issueRefreshToken(User $user, string $device_id): RefreshToken;
     public function issueAccessToken(User $user): string;
 }

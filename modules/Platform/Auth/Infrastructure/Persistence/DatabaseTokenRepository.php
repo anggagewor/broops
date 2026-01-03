@@ -25,7 +25,8 @@ class DatabaseTokenRepository implements TokenRepository
         return new RefreshToken(
             token: $token, // RAW token tetep di domain
             userId: $row->user_id,
-            expiresAt: Carbon::parse($row->expires_at)
+            expiresAt: Carbon::parse($row->expires_at),
+            device_id: $row->device_id,
         );
     }
 
@@ -36,6 +37,7 @@ class DatabaseTokenRepository implements TokenRepository
             'token'      => hash('sha256', $token->token),
             'expires_at' => $token->expiresAt,
             'created_at' => now(),
+            'device' => $token->device_id,
         ]);
     }
 

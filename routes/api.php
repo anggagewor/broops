@@ -9,3 +9,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/auth/login', \Modules\Platform\Auth\Http\Controllers\LoginController::class);
 Route::post('/auth/register', \Modules\Platform\Auth\Http\Controllers\RegisterController::class);
+
+
+Route::middleware('jwt')->group(function () {
+    Route::get('/me', function (Request $request) {
+        $user = $request->attributes->get('auth_user');
+
+        return [
+            'id' => $user->id,
+            'email' => $user->email,
+        ];
+    });
+});
